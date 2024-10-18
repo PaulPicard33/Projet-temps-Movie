@@ -422,6 +422,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87f94da07b9b1d64c92f2e71d31b483d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  vrHeadset: {fileID: 963194228}
+  isSitting: 0
+  EndOfRoad: 0
+  record: 0
 --- !u!1 &970622560
 GameObject:
   m_ObjectHideFlags: 0
