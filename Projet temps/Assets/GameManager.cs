@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using OVR.OpenVR;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -8,8 +10,9 @@ public class GameManager : MonoBehaviour
     //singleton instance
     public static GameManager Instance;
     public string state; //game state
-    public bool EndOfRoad;
-    public bool StartWalking;
+    public bool EndOfRoad; // booléen pour savoir si on est arrivé à la fin du chemin
+    public bool StartWalking; //booléen pour savoir quand commencer à marcher 
+    public int trials; // nombre de trials
     void Awake(){
         if(Instance == null){
             Instance = this;
@@ -38,25 +41,47 @@ public class GameManager : MonoBehaviour
 
 
 
-
+                state  = "Forward";
                 break;
             case("Forward"):
             
-            
+
+
+
+
+
+                state = "Backward";
                 break;
             case ("Backward"):
+                if(Input.GetKeyDown(KeyCode.Space))
+                {
+                    //arréter le record des données 
+            Debug.Log("Space key was pressed");
+
+                }
 
 
+
+
+
+                state = "seated 2";
                 break;
-
-
             case("seated 2"):
 
 
-                break;
 
+
+                state = "visualisation";
+                break;
             case("visualisation"):
 
+
+                if(OVRInput.GetUp(OVRInput.RawButton.A))
+            {
+                //arrêter le temps de visualisation et l'écrire dans le doc 
+                }
+
+                state = "seated 1";
                 break;
         }
     
@@ -77,5 +102,16 @@ public class GameManager : MonoBehaviour
         //envoyer un son dans le casque pour dire de commencer à marcher 
         StartWalking = true;
     }
+    public void record ()
+    {   if (state == "Forward" || state== "Backward")
+    {
+// enregistrer et envoyer les données temporelles et spatiales de la personne dans un fichier
 
+    }
+    else if (state == "visualisation")
+    {
+        //enregistrer les données temporelles de la personne dans un fichier 
+    }
+
+}
 }

@@ -2,9 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UI : MonoBehaviour
+public class UIManager : MonoBehaviour
 {
     // Start is called before the first frame update
+    public UIInputField inputField;
+    public Text text;
+    public Slider slider;
+
     void Start()
     {
         
@@ -17,7 +21,7 @@ public class UI : MonoBehaviour
     }
     void FixedUpdate()
         {
-            
+
         }
     
 }

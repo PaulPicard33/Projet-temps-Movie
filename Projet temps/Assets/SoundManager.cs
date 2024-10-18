@@ -6,6 +6,7 @@ public class SoundManager : MonoBehaviour
 {   public AudioSource audioSource;
     public AudioClip clipEnOfRoad;
     public AudioClip clipStartWalking;
+    public AudioClip clipincentives;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,9 +21,15 @@ public class SoundManager : MonoBehaviour
         {   audioSource.clip = clipEnOfRoad;
             audioSource.Play();
         }
-     if (GameManager.Instance.StartWalking == true)
+      else if (GameManager.Instance.StartWalking == true)
         {   audioSource.clip = clipStartWalking;
             audioSource.Play();
         }
+        else if (GameManager.Instance.state =="seated 1" && GameManager.Instance.trials == 0 )
+        {
+            audioSource.clip = clipincentives;
+            audioSource.Play();
+        }
+        
 }
 }
