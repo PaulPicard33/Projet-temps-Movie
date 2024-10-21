@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using OVR.OpenVR;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class GameManager : MonoBehaviour
     public bool EndOfRoad; // booléen pour savoir si on est arrivé à la fin du chemin
     public bool StartWalking; //booléen pour savoir quand commencer à marcher 
     public int trials; // nombre de trials
+    public UIManager UImanager; // UI manager
     void Awake(){
         if(Instance == null){
             Instance = this;
@@ -40,7 +42,7 @@ public class GameManager : MonoBehaviour
         {   case("seated1"):
 
 
-
+                wait_for_time(); // attendre un certain nombre de secondes aléatoires avant de commencer à marcher 
                 state  = "Forward";
                 break;
             case("Forward"):
@@ -70,7 +72,7 @@ public class GameManager : MonoBehaviour
 
 
 
-
+                wait_for_time(); // attendre un certain nombre de secondes aléatoires avant de commencer à visualiser 
                 state = "visualisation";
                 break;
             case("visualisation"):
@@ -80,7 +82,8 @@ public class GameManager : MonoBehaviour
             {
                 //arrêter le temps de visualisation et l'écrire dans le doc 
                 }
-
+                trials +=1;
+                UImanager.ChangeText_Trials();
                 state = "seated 1";
                 break;
         }
@@ -114,4 +117,22 @@ public class GameManager : MonoBehaviour
     }
 
 }
+    public void reset_data()
+    {
+        //reset des données et des variables
+        trials = 0;
+        
+    }
+    public void wait_for_time ()
+    {
+        //attendre un certain temps avant de passer à l'étape suivante
+        {
+        StartCoroutine(WaitAndExecute(N_seconds: UImanager.generateCoolDown()));
+        }
+    }
+    IEnumerator WaitAndExecute( float N_seconds)
+    {
+        yield return new WaitForSeconds(N_seconds);
+    }
+    
 }

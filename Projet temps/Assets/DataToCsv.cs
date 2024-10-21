@@ -5,11 +5,12 @@ public class DataToCSV : MonoBehaviour
 {
     // Chemin du fichier CSV (modifie ce chemin si nécessaire)
     private string filePath = "C:/Users/33673/MOVIE/temps/Projet-temps-Movie/relevédedonnées";
+    public UIManager UIManager;
 
     void Start()
     {
         // Initialisation du chemin (on peut aussi mettre un chemin absolu)
-        filePath = Application.dataPath + "/DataCollected.csv"; // compléter à partir de l'UI à chaque nouveau sujet 
+        filePath = Application.dataPath + UIManager.Text_Date_person.ToString() + ".csv"; // compléter à partir de l'UI à chaque nouveau sujet 
 
         // Si le fichier n'existe pas, le créer et écrire l'en-tête
         if (!File.Exists(filePath))
@@ -36,6 +37,6 @@ public class DataToCSV : MonoBehaviour
             string dataLine = time + "," + position.x + "," + position.y + "," + position.z;
             writer.WriteLine(dataLine);
         }
-    }
-}
+    }}
+    
 }
