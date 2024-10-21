@@ -44,17 +44,30 @@ public class UIManager : MonoBehaviour
          
     }
     public List<double> Distance_list()
-    {   double i;
-        
+    {   int i;
+        List<double> output = new List<double>();
         int output_max = Limitmax.options[Limitmax.value].text[0];
         int output_min = Limitmin.options[Limitmin.value].text[0];
-        for (i = output_min; i < output_max; i++)
-        {   List<double> output;
+        for (i = output_min; i < output_max+1; i++)
+        {   
             double half = i + 0.5;               
             output.Add(i);
             output.Add(half);
         }
-        return();
+        while (output.Count <= 10)
+        {
+            output.Add(output[Random.Range(0, output.Count)]);
+        }
+    for( i=0; i<output.Count; i++)
+        {   int rng = Random.Range(0, output.Count);// le but ici est de shuffle la liste des temps d'attente possible 
+            double temp  = output[rng];
+            output[i] = temp;
+            output[rng] = output[i];
+
+        }
+
+        return((output));
     }
+    
 }
 
