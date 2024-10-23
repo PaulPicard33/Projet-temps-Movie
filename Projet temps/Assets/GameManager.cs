@@ -52,7 +52,7 @@ public class GameManager : MonoBehaviour
                 state  = "Forward";
                 break;
             case("Forward"):
-            
+
                 GoForward();
                 record = true;// commencer à enregistrer les données
                 state = "Backward";
@@ -86,12 +86,9 @@ public class GameManager : MonoBehaviour
                 trials +=1;
                 UImanager.ChangeText_Trials();
                 state = "seated 1";
-                break;
+                break;  
         }
     
-    }
-    void FixedUpdate()
-    {    
     }
 
     public void GoBack()
