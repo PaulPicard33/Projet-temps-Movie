@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using OVR.OpenVR;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,7 +16,9 @@ public class GameManager : MonoBehaviour
     public bool StartWalking; //booléen pour savoir quand commencer à marcher 
     public int trials; // nombre de trials
     public UIManager UImanager; // UI manager
-    public List<double> Max_distances; // liste des distances
+    public List<double> Max_distances;
+     public int count_max_distances; // liste des distances
+     public bool record;
     void Awake(){
         if(Instance == null){
             Instance = this;
@@ -33,56 +36,52 @@ public class GameManager : MonoBehaviour
             Display.displays[i].Activate();
             Debug.Log("Activation de l'écran : " + i);
         }
-        
+        reset_data();
+        Max_distances = UImanager.Distance_list();
+        shuffle(Max_distances);
     }
 
     // Update is called once per frame
     void Update()
-    {
+    {   UImanager.ResetButton.onClick.AddListener(reset_data);  
+        if (trials <= int.Parse(UImanager.NumberOfTrials.text[0].ToString()))
         switch (state)
         {   case("seated1"):
-
-                Max_distances = UImanager.Distance_list();
                 wait_for_time(); // attendre un certain nombre de secondes aléatoires avant de commencer à marcher 
+                record =false;
                 state  = "Forward";
                 break;
             case("Forward"):
             
-
-
-
-                record()    ; // commencer à enregistrer les données
+                GoForward();
+                record = true;// commencer à enregistrer les données
                 state = "Backward";
                 break;
             case ("Backward"):
 
-                record()    ; // continuer à enregistrer les données
+                record=true;// continuer à enregistrer les données
                 if(Input.GetKeyDown(KeyCode.Space))
                 {
                     //arréter le record des données 
             Debug.Log("Space key was pressed");
+                record= false;
 
                 }
-
-
-
-
-
+                count_max_distances+=1;
                 state = "seated 2";
                 break;
             case("seated 2"):
-
-
-
                 wait_for_time(); // attendre un certain nombre de secondes aléatoires avant de commencer à visualiser 
+                record = false;
                 state = "visualisation";
                 break;
             case("visualisation"):
 
-
+                record = true;// continuer à enregistrer les données
                 if(OVRInput.GetUp(OVRInput.RawButton.A))
             {
                 //arrêter le temps de visualisation et l'écrire dans le doc 
+                record = false;
                 }
                 trials +=1;
                 UImanager.ChangeText_Trials();
@@ -91,8 +90,8 @@ public class GameManager : MonoBehaviour
         }
     
     }
-    void FixedUpdate(){
-        
+    void FixedUpdate()
+    {    
     }
 
     public void GoBack()
@@ -108,22 +107,13 @@ public class GameManager : MonoBehaviour
         StartWalking = true;    
         //envoyer une image GO sur l'écran
     }
-    public void record ()
-    {   if (state == "Forward" || state== "Backward")
-    {
-// enregistrer et envoyer les données temporelles et spatiales de la personne dans un fichier
-
-    }
-    else if (state == "visualisation")
-    {
-        //enregistrer les données temporelles de la personne dans un fichier 
-    }
-
-}
+    
     public void reset_data()
     {
         //reset des données et des variables
         trials = 0;
+        count_max_distances =0;
+        state = "seated1";
         
     }
     public void wait_for_time ()
@@ -140,5 +130,18 @@ public class GameManager : MonoBehaviour
      public void change_quality()
     {
         // changer le nombre de triangles dans le mesh renderer 
+    }
+    public List<double> shuffle(List<double> output)
+    {
+        int i;
+    for( i=0; i<output.Count; i++)
+        {   int rng = UnityEngine.Random.Range(0, output.Count);// le but ici est de shuffle la liste des temps d'attente possible 
+            double temp  = output[rng];
+            output[i] = temp;
+            output[rng] = output[i];
+
+        }
+
+        return((output));
     }
 }

@@ -18,6 +18,7 @@ public class UIManager : MonoBehaviour
     public TMP_Dropdown D_level;
     public TMP_Text Trials;
     public TMP_InputField NumberOfTrials;
+    public Button ResetButton;
 
     void Start()
     {
@@ -50,8 +51,8 @@ public class UIManager : MonoBehaviour
     {   
         int i;
         List<double> output = new List<double>();
-        int output_max = Limitmax.ToString()[0];
-        int output_min = Limitmin.ToString()[0];
+        int output_max = int.Parse(Limitmax.text[0].ToString());
+        int output_min = int.Parse(Limitmin.text[0].ToString());
         for (i = output_min; i < output_max; i++)
         {   
             double half = i + 0.5;               
@@ -62,19 +63,7 @@ public class UIManager : MonoBehaviour
         return output;
         
     }
-    public List<double> shuffle(List<double> output)
-    {
-        int i;
-    for( i=0; i<output.Count; i++)
-        {   int rng = UnityEngine.Random.Range(0, output.Count);// le but ici est de shuffle la liste des temps d'attente possible 
-            double temp  = output[rng];
-            output[i] = temp;
-            output[rng] = output[i];
-
-        }
-
-        return((output));
-    }
+    
 }
     
 

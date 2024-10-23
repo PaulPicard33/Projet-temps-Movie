@@ -25,15 +25,16 @@ public class DataToCSV : MonoBehaviour
     }
 
     void Update()
-    {   
+    {   if (GameManager.Instance.record == true)
+    {
         string step = GameManager.Instance.state + GameManager.Instance.trials.ToString();
         if (GameManager.Instance.state == "Forward")
         // Collecter des données à chaque frame (par exemple la position du joueur)
         {float time = Time.time;
         Vector3 position = transform.position;
         using (StreamWriter writer = new StreamWriter(filePath, true))
-        {
-            string dataLine =step+ time + "," + position.x + "," + position.y + "," + position.z;
+        {   int Delta_time = (int) (Time.time-time);
+            string dataLine =step+','+ Delta_time + "," + position.x + "," + position.y + "," + position.z;
             writer.WriteLine(dataLine);
         }
         }
@@ -41,8 +42,8 @@ public class DataToCSV : MonoBehaviour
         {float time = Time.time;
         Vector3 position = transform.position;
         using (StreamWriter writer = new StreamWriter(filePath, true))
-        {
-            string dataLine = step + time + "," + position.x + "," + position.y + "," + position.z;
+        {   int Delta_time = (int) (Time.time-time);
+            string dataLine = step +','+ Delta_time + "," + position.x + "," + position.y + "," + position.z;
             writer.WriteLine(dataLine);
         }
         }
@@ -50,12 +51,12 @@ public class DataToCSV : MonoBehaviour
         {float time = Time.time;
         Vector3 position = transform.position;
         using (StreamWriter writer = new StreamWriter(filePath, true))
-        {
-            string dataLine = step+ time + "," + position.x + "," + position.y + "," + position.z;
+        {   int Delta_time = (int) (Time.time-time);
+            string dataLine = step+','+ Delta_time;
             writer.WriteLine(dataLine);
         }
         }
-
+    }
 
     }}
     

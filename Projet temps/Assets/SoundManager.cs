@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {   public AudioSource audioSource;
-    public AudioClip clipEnOfRoad;
+    public AudioClip clipEndOfRoad;
     public AudioClip clipStartWalking;
     public AudioClip clipincentives;
     // Start is called before the first frame update
@@ -18,7 +18,7 @@ public class SoundManager : MonoBehaviour
     {
          // Play the audio when the space key is pressed
         if (GameManager.Instance.EndOfRoad == true)
-        {   audioSource.clip = clipEnOfRoad;
+        {   audioSource.clip = clipEndOfRoad;
             audioSource.Play();
         }
       else if (GameManager.Instance.StartWalking == true)
