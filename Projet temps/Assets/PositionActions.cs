@@ -29,7 +29,7 @@ public class PositionActions : MonoBehaviour
         UnityEngine.Vector3 headPosition = vrHeadset.position;
         double distance = Vector3.Distance(headPosition, new Vector3(0, 0, 0));
 
-        if (distance > 5f)
+        if (distance > GameManager.Instance.Max_distances[GameManager.Instance.trials])
         {
          GameManager.Instance.GoBack();
         }

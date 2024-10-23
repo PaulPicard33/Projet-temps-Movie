@@ -1,4 +1,5 @@
 using System.IO;   // Pour utiliser StreamWriter
+using JetBrains.Annotations;
 using UnityEngine;
 
 public class DataToCSV : MonoBehaviour
@@ -25,18 +26,36 @@ public class DataToCSV : MonoBehaviour
 
     void Update()
     {   
-        
-        if (GameManager.Instance.state == "Forward" || GameManager.Instance.state == "Backward" || GameManager.Instance.state =="visualisation")
+        string step = GameManager.Instance.state + GameManager.Instance.trials.ToString();
+        if (GameManager.Instance.state == "Forward")
         // Collecter des données à chaque frame (par exemple la position du joueur)
         {float time = Time.time;
         Vector3 position = transform.position;
-
-        // Écrire ces données dans le fichier CSV
         using (StreamWriter writer = new StreamWriter(filePath, true))
         {
-            string dataLine = time + "," + position.x + "," + position.y + "," + position.z;
+            string dataLine =step+ time + "," + position.x + "," + position.y + "," + position.z;
             writer.WriteLine(dataLine);
         }
+        }
+        else if(GameManager.Instance.state == "Backward")
+        {float time = Time.time;
+        Vector3 position = transform.position;
+        using (StreamWriter writer = new StreamWriter(filePath, true))
+        {
+            string dataLine = step + time + "," + position.x + "," + position.y + "," + position.z;
+            writer.WriteLine(dataLine);
+        }
+        }
+        else if(GameManager.Instance.state == "visualisation")
+        {float time = Time.time;
+        Vector3 position = transform.position;
+        using (StreamWriter writer = new StreamWriter(filePath, true))
+        {
+            string dataLine = step+ time + "," + position.x + "," + position.y + "," + position.z;
+            writer.WriteLine(dataLine);
+        }
+        }
+
+
     }}
     
-}

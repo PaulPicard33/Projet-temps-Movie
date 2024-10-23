@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     public bool StartWalking; //booléen pour savoir quand commencer à marcher 
     public int trials; // nombre de trials
     public UIManager UImanager; // UI manager
+    public List<double> Max_distances; // liste des distances
     void Awake(){
         if(Instance == null){
             Instance = this;
@@ -41,7 +42,7 @@ public class GameManager : MonoBehaviour
         switch (state)
         {   case("seated1"):
 
-
+                Max_distances = UImanager.Distance_list();
                 wait_for_time(); // attendre un certain nombre de secondes aléatoires avant de commencer à marcher 
                 state  = "Forward";
                 break;
@@ -50,11 +51,12 @@ public class GameManager : MonoBehaviour
 
 
 
-
-
+                record()    ; // commencer à enregistrer les données
                 state = "Backward";
                 break;
             case ("Backward"):
+
+                record()    ; // continuer à enregistrer les données
                 if(Input.GetKeyDown(KeyCode.Space))
                 {
                     //arréter le record des données 
@@ -103,7 +105,8 @@ public class GameManager : MonoBehaviour
     public void GoForward()
     {
         //envoyer un son dans le casque pour dire de commencer à marcher 
-        StartWalking = true;
+        StartWalking = true;    
+        //envoyer une image GO sur l'écran
     }
     public void record ()
     {   if (state == "Forward" || state== "Backward")
@@ -134,5 +137,8 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(N_seconds);
     }
-    
+     public void change_quality()
+    {
+        // changer le nombre de triangles dans le mesh renderer 
+    }
 }
