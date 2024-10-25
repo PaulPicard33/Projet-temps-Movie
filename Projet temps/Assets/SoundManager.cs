@@ -10,26 +10,31 @@ public class SoundManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        if (audioSource == null)
+        {
+            audioSource = GetComponent<AudioSource>();
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-         // Play the audio when the space key is pressed
-        if (GameManager.Instance.EndOfRoad == true)
-        {   audioSource.clip = clipEndOfRoad;
-            audioSource.Play();
-        }
-      else if (GameManager.Instance.StartWalking == true)
-        {   audioSource.clip = clipStartWalking;
-            audioSource.Play();
-        }
-        else if (GameManager.Instance.state =="seated 1" && GameManager.Instance.trials == 0 )
-        {
-            audioSource.clip = clipincentives;
-            audioSource.Play();
-        }
-        
+    
+    }
+     public void playstop()
+    {
+        audioSource.clip = clipEndOfRoad;
+        audioSource.Play();
+    }
+    public void playstart()
+    {
+        audioSource.clip = clipStartWalking;
+        audioSource.Play();
+    }
+    public void playincentives()
+    {
+        audioSource.clip = clipincentives;
+        audioSource.Play();
+    }
 }
-}
+

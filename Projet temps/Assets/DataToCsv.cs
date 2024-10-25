@@ -6,7 +6,7 @@ public class DataToCSV : MonoBehaviour
 {
     // Chemin du fichier CSV (modifie ce chemin si nécessaire)
     private string filePath = "C:/Users/33673/MOVIE/temps/Projet-temps-Movie/relevédedonnées";
-    public UIManager UIManager;
+    
 
     void Start()
     {

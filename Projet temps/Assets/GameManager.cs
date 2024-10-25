@@ -11,11 +11,10 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     //singleton instance
     public static GameManager Instance;
-    public string state; //game state
-    public bool EndOfRoad; // booléen pour savoir si on est arrivé à la fin du chemin
-    public bool StartWalking; //booléen pour savoir quand commencer à marcher 
+    public string state; //game state 
     public int trials; // nombre de trials
     public UIManager UImanager; // UI manager
+    public SoundManager soundManager; // sound manager
     public List<double> Max_distances;
      public int count_max_distances; // liste des distances
      public bool record;
@@ -28,7 +27,7 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    
+    void create
     void Start()
     {
         for (int i = 1; i < Display.displays.Length; i++)
@@ -43,7 +42,7 @@ public class GameManager : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {   UImanager.ResetButton.onClick.AddListener(reset_data);  
+    {     
         if (trials <= int.Parse(UImanager.NumberOfTrials.text[0].ToString()))
         switch (state)
         {   case("seated1"):
@@ -94,14 +93,13 @@ public class GameManager : MonoBehaviour
     public void GoBack()
     {
      //envoyer un son dans le casque pour dire de revenir en arrière 
+    soundManager.playstop();
     
-    EndOfRoad =true;
      // créer la vision de la fin de la course avec un mur ou quelque chose    
     }
     public void GoForward()
     {
         //envoyer un son dans le casque pour dire de commencer à marcher 
-        StartWalking = true;    
         //envoyer une image GO sur l'écran
     }
     
@@ -139,6 +137,6 @@ public class GameManager : MonoBehaviour
 
         }
 
-        return((output));
+        return(output);
     }
 }
