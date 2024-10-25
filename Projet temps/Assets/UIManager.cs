@@ -18,7 +18,7 @@ public class UIManager : MonoBehaviour
     public TMP_Dropdown D_level;
     public TMP_Text Trials;
     public TMP_InputField NumberOfTrials;
-    public Button ResetButton;
+    public Button StartButton;
 
     void Start()
     {

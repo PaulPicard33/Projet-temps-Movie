@@ -5,6 +5,7 @@ using System.Threading;
 using OVR.OpenVR;
 using UnityEngine;
 using UnityEngine.UI;
+using System.IO;
 
 public class GameManager : MonoBehaviour
 {
@@ -15,9 +16,13 @@ public class GameManager : MonoBehaviour
     public int trials; // nombre de trials
     public UIManager UImanager; // UI manager
     public SoundManager soundManager; // sound manager
+    public DataToCSV    dataToCSV; // data to csv
     public List<double> Max_distances;
      public int count_max_distances; // liste des distances
      public bool record;
+     public string Text_Name; // nom du participant et date etc 
+    private string filePath = "C:/Users/33673/MOVIE/temps/Projet-temps-Movie/relevédedonnées";
+    public int NumberOfTrials;
     void Awake(){
         if(Instance == null){
             Instance = this;
@@ -27,7 +32,7 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    void create
+    
     void Start()
     {
         for (int i = 1; i < Display.displays.Length; i++)
@@ -35,15 +40,12 @@ public class GameManager : MonoBehaviour
             Display.displays[i].Activate();
             Debug.Log("Activation de l'écran : " + i);
         }
-        reset_data();
-        Max_distances = UImanager.Distance_list();
-        shuffle(Max_distances);
     }
 
     // Update is called once per frame
     void Update()
     {     
-        if (trials <= int.Parse(UImanager.NumberOfTrials.text[0].ToString()))
+        if (trials <= NumberOfTrials)
         switch (state)
         {   case("seated1"):
                 wait_for_time(); // attendre un certain nombre de secondes aléatoires avant de commencer à marcher 
@@ -89,6 +91,39 @@ public class GameManager : MonoBehaviour
         }
     
     }
+    public void Create_distances_lists()
+    {
+        //créer une liste de distances aléatoires
+        Max_distances= UImanager.Distance_list();
+        shuffle();
+
+    }
+    public void writer()
+    {
+        //écrire les données dans un fichier csv
+        filePath = Application.dataPath + GameManager.Instance.Text_Name.ToString() +"states"+ ".csv"; // compléter à partir de l'UI à chaque nouveau sujet 
+        if (!File.Exists(filePath))
+        {
+            // Écrire l'en-tête du fichier CSV (par exemple : "Temps, Position X, Position Y, Position Z")
+            using (StreamWriter writer = new StreamWriter(filePath, true))
+            {
+                writer.WriteLine("Temps,Position X,Position Y,Position Z");
+            }
+        }
+    }
+    public void writer_state(string state)
+    {
+        //écrire les données dans un fichier csv
+        filePath = Application.dataPath + GameManager.Instance.Text_Name.ToString() +"states"+ ".csv"; // compléter à partir de l'UI à chaque nouveau sujet 
+        if (!File.Exists(filePath))
+        {
+            // Écrire l'en-tête du fichier CSV (par exemple : "Temps, Position X, Position Y, Position Z")
+            using (StreamWriter writer = new StreamWriter(filePath, true))
+            {
+                writer.WriteLine(state);
+            }
+        }
+    }
 
     public void GoBack()
     {
@@ -109,6 +144,10 @@ public class GameManager : MonoBehaviour
         trials = 0;
         count_max_distances =0;
         state = "seated1";
+        Create_distances_lists();
+        writer(); // reset du fichier avec les states 
+        dataToCSV.write_name();//reset du nom du fichier csv
+        NumberOfTrials= int.Parse(UImanager.NumberOfTrials.text.ToString()); //reset du nombre de trials
         
     }
     public void wait_for_time ()
@@ -126,17 +165,19 @@ public class GameManager : MonoBehaviour
     {
         // changer le nombre de triangles dans le mesh renderer 
     }
-    public List<double> shuffle(List<double> output)
+    public void shuffle()
     {
         int i;
-    for( i=0; i<output.Count; i++)
-        {   int rng = UnityEngine.Random.Range(0, output.Count);// le but ici est de shuffle la liste des temps d'attente possible 
-            double temp  = output[rng];
-            output[i] = temp;
-            output[rng] = output[i];
+    for( i=0; i<Max_distances.Count; i++)
+        {   int rng = UnityEngine.Random.Range(0, Max_distances.Count);// le but ici est de shuffle la liste des temps d'attente possible 
+            double temp  = Max_distances[rng];
+            Max_distances[i] = temp;
+            Max_distances[rng] = Max_distances[i];
 
         }
-
-        return(output);
+    }
+    public void createName()
+    {
+         Text_Name= UImanager.Text_Date_person.ToString();
     }
 }

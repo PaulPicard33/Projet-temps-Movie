@@ -837,7 +837,7 @@ MonoBehaviour:
   D_level: {fileID: 1649268085}
   Trials: {fileID: 147496537}
   NumberOfTrials: {fileID: 1504579082}
-  ResetButton: {fileID: 1297488280}
+  StartButton: {fileID: 0}
 --- !u!1 &233571693
 GameObject:
   m_ObjectHideFlags: 0
@@ -988,7 +988,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 253d73ec5e21be44aa5b511faaee494f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UIManager: {fileID: 231681771}
 --- !u!4 &239643826
 Transform:
   m_ObjectHideFlags: 0
@@ -2000,7 +1999,7 @@ GameObject:
   - component: {fileID: 719646702}
   - component: {fileID: 719646701}
   m_Layer: 5
-  m_Name: T_Resetbutton
+  m_Name: T_StartButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2045,7 +2044,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Reset Button : \n"
+  m_text: "Start Button : \n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3737,6 +3736,7 @@ MonoBehaviour:
   Max_distances: []
   count_max_distances: 0
   record: 0
+  Text_Name: 
 --- !u!4 &1101751130
 Transform:
   m_ObjectHideFlags: 0
@@ -4688,7 +4688,7 @@ GameObject:
   - component: {fileID: 1297488281}
   - component: {fileID: 1297488280}
   m_Layer: 5
-  m_Name: ResetButton
+  m_Name: StartButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6096,7 +6096,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87f94da07b9b1d64c92f2e71d31b483d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UImanager: {fileID: 231681771}
 --- !u!114 &1645145377
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6109,7 +6108,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 253d73ec5e21be44aa5b511faaee494f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UIManager: {fileID: 0}
 --- !u!1 &1649268083
 GameObject:
   m_ObjectHideFlags: 0
@@ -6979,7 +6977,19 @@ MonoBehaviour:
   m_CharacterLimit: 0
   m_OnEndEdit:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1101751129}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: createName
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_OnSubmit:
     m_PersistentCalls:
       m_Calls: []
