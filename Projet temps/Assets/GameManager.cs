@@ -163,7 +163,16 @@ public class GameManager : MonoBehaviour
     }
      public void change_quality()
     {
-        // changer le nombre de triangles dans le mesh renderer 
+        // Accéder à l'option sélectionnée dans le TMP_Dropdown
+    string meshQuality = UImanager.D_level.options[UImanager.D_level.value].text;
+        if (meshQuality == "Low")
+            {
+                QualitySettings.SetQualityLevel(1);
+            }
+        else //Il est alors nécéssairement "High"
+         {
+            QualitySettings.SetQualityLevel(3);
+        }
     }
     public void shuffle()
     {
