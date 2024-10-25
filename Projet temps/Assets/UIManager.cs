@@ -22,7 +22,7 @@ public class UIManager : MonoBehaviour
 
     void Start()
     {
-        Trials.text = "Trials:" + GameManager.Instance.trials.ToString();
+        //Trials.text = "Trials:" + GameManager.Instance.trials.ToString();
     }
 
     // Update is called once per frame

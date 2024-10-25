@@ -35,7 +35,7 @@ public class DataToCSV : MonoBehaviour
         {float time = Time.time;
         Vector3 position = transform.position;
         using (StreamWriter writer = new StreamWriter(filePath, true))
-            {string dataLine =++ time + "," + position.x + "," + position.y + "," + position.z;
+            {string dataLine =+ time + "," + position.x + "," + position.y + "," + position.z;
             writer.WriteLine(dataLine);
             }
         }

@@ -13,13 +13,12 @@ public class GameManager : MonoBehaviour
     //singleton instance
     public static GameManager Instance;
     public string state; //game state 
-    public int trials; // nombre de trials
+    public int trials=0; // nombre de trials
     public UIManager UImanager; // UI manager
     public SoundManager soundManager; // sound manager
     public DataToCSV    dataToCSV; // data to csv
     public List<double> Max_distances;
      public int count_max_distances; // liste des distances
-     public bool record;
      public string Text_Name; // nom du participant et date etc 
     private string filePath = "C:/Users/33673/MOVIE/temps/Projet-temps-Movie/relevédedonnées";
     public int NumberOfTrials;
@@ -40,55 +39,56 @@ public class GameManager : MonoBehaviour
             Display.displays[i].Activate();
             Debug.Log("Activation de l'écran : " + i);
         }
+        state = "configuration";
     }
 
     // Update is called once per frame
     void Update()
     {     
         if (trials <= NumberOfTrials)
+        {
+        writer_state(state);
         switch (state)
-        {   case("seated1"):
+
+        {   case ("configuration"):
+            
+            
+            break;
+            case("seated1"):
                 wait_for_time(); // attendre un certain nombre de secondes aléatoires avant de commencer à marcher 
-                record =false;
+
                 state  = "Forward";
                 break;
             case("Forward"):
 
                 GoForward();
-                record = true;// commencer à enregistrer les données
                 state = "Backward";
                 break;
             case ("Backward"):
 
-                record=true;// continuer à enregistrer les données
                 if(Input.GetKeyDown(KeyCode.Space))
                 {
                     //arréter le record des données 
             Debug.Log("Space key was pressed");
-                record= false;
-
                 }
                 count_max_distances+=1;
                 state = "seated 2";
                 break;
             case("seated 2"):
                 wait_for_time(); // attendre un certain nombre de secondes aléatoires avant de commencer à visualiser 
-                record = false;
                 state = "visualisation";
                 break;
             case("visualisation"):
 
-                record = true;// continuer à enregistrer les données
                 if(OVRInput.GetUp(OVRInput.RawButton.A))
             {
                 //arrêter le temps de visualisation et l'écrire dans le doc 
-                record = false;
                 }
                 trials +=1;
                 UImanager.ChangeText_Trials();
                 state = "seated 1";
                 break;  
-        }
+        }}
     
     }
     public void Create_distances_lists()
@@ -101,20 +101,20 @@ public class GameManager : MonoBehaviour
     public void writer()
     {
         //écrire les données dans un fichier csv
-        filePath = Application.dataPath + GameManager.Instance.Text_Name.ToString() +"states"+ ".csv"; // compléter à partir de l'UI à chaque nouveau sujet 
+        filePath = Application.dataPath + Text_Name.ToString() +"states"+ ".csv"; // compléter à partir de l'UI à chaque nouveau sujet 
         if (!File.Exists(filePath))
         {
             // Écrire l'en-tête du fichier CSV (par exemple : "Temps, Position X, Position Y, Position Z")
             using (StreamWriter writer = new StreamWriter(filePath, true))
             {
-                writer.WriteLine("Temps,Position X,Position Y,Position Z");
+                writer.WriteLine("States");
             }
         }
     }
     public void writer_state(string state)
     {
         //écrire les données dans un fichier csv
-        filePath = Application.dataPath + GameManager.Instance.Text_Name.ToString() +"states"+ ".csv"; // compléter à partir de l'UI à chaque nouveau sujet 
+        filePath = Application.dataPath +Text_Name.ToString() +"states"+ ".csv"; // compléter à partir de l'UI à chaque nouveau sujet 
         if (!File.Exists(filePath))
         {
             // Écrire l'en-tête du fichier CSV (par exemple : "Temps, Position X, Position Y, Position Z")
@@ -143,12 +143,11 @@ public class GameManager : MonoBehaviour
         //reset des données et des variables
         trials = 0;
         count_max_distances =0;
-        state = "seated1";
         Create_distances_lists();
         writer(); // reset du fichier avec les states 
         dataToCSV.write_name();//reset du nom du fichier csv
-        NumberOfTrials= int.Parse(UImanager.NumberOfTrials.text.ToString()); //reset du nombre de trials
-        
+        NumberOfTrials = int.Parse(UImanager.NumberOfTrials.text.ToString()); //reset du nombre de trials
+        state = "seated1";
     }
     public void wait_for_time ()
     {
