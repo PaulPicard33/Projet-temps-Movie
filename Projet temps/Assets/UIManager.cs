@@ -19,7 +19,7 @@ public class UIManager : MonoBehaviour
     public TMP_Text Trials;
     public TMP_InputField NumberOfTrials;
     public Button StartButton;
-
+    public TMP_Text error_text;
     void Start()
     {
         //Trials.text = "Trials:" + GameManager.Instance.trials.ToString();
