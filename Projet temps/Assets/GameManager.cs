@@ -140,14 +140,24 @@ public class GameManager : MonoBehaviour
     
     public void reset_data()
     {
-        //reset des données et des variables
+       
+        if (int.TryParse(UImanager.NumberOfTrials.text.ToString(), out int NumberOfTrials) == false ||
+         int.TryParse(UImanager.Limitmax.text.ToString(), out int Limitmax) == false ||
+          int.TryParse(UImanager.Limitmin.text.ToString(), out int Limitmin) == false ||
+          UImanager.Text_Date_person.text.Length == 0)
+        {
+            UImanager.error_text.text = "veuillez remplir les champs de manière appropriée et réessayez";
+        }
+        else {NumberOfTrials = int.Parse(UImanager.NumberOfTrials.text.ToString()); //reset du nombre de trials
+         //reset des données et des variables
         trials = 0;
         count_max_distances =0;
         Create_distances_lists();
         writer(); // reset du fichier avec les states 
         dataToCSV.write_name();//reset du nom du fichier csv
-        NumberOfTrials = int.Parse(UImanager.NumberOfTrials.text.ToString()); //reset du nombre de trials
         state = "seated1";
+        }
+
     }
     public void wait_for_time ()
     {
