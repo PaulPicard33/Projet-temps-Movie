@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1536
     height: 772.8
   m_ShowMode: 4
-  m_Title: Console
+  m_Title: Game
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -145,7 +145,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 41
+  controlID: 50
   draggingID: 0
 --- !u!114 &7
 MonoBehaviour:
@@ -273,8 +273,8 @@ MonoBehaviour:
     y: 0
     width: 478.40002
     height: 722.8
-  m_MinSize: {x: 275, y: 50}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 276, y: 71}
+  m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 18}
   m_Panes:
   - {fileID: 18}
@@ -673,7 +673,7 @@ MonoBehaviour:
   m_Rotation:
     m_Target: {x: 0.14405099, y: 0.19922318, z: -0.029620763, w: 0.9688581}
     speed: 2
-    m_Value: {x: 0.14405069, y: 0.19922277, z: -0.029620703, w: 0.96885616}
+    m_Value: {x: -0.14405099, y: -0.19922318, z: 0.029620763, w: -0.9688581}
   m_Size:
     m_Target: 529.2536
     speed: 2
@@ -739,9 +739,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 2c4a0100
-      m_LastClickedID: 84524
-      m_ExpandedIDs: 2e0dffff340dffff6e11ffff422effff802effffe839ffffe449ffff6a4affff744affff966dffffe46dffff5479fffff2f6ffff32fbfffff4ffffff64740000a67400003875000020760000a47600000cd80000dad9000050dc0000562c010038490100
+      m_SelectedIDs: 
+      m_LastClickedID: 0
+      m_ExpandedIDs: 32fbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -925,21 +925,21 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 32810000
     m_LastClickedID: 33074
-    m_ExpandedIDs: 0000000032810000348100003681000000ca9a3b
+    m_ExpandedIDs: 00000000288100002a8100002c810000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: Oculus
-      m_OriginalName: Oculus
+      m_Name: 
+      m_OriginalName: 
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 42660
+      m_UserData: 0
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 0
+      m_OriginalEventType: 11
       m_IsRenamingFilename: 1
       m_ClientGUIView: {fileID: 10}
     m_SearchString: 
@@ -953,7 +953,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000328100003481000036810000
+    m_ExpandedIDs: 00000000288100002a8100002c810000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1119,7 +1119,7 @@ MonoBehaviour:
     m_ControlHash: -371814159
     m_PrefName: Preview_InspectorPreview
   m_LastInspectedObjectInstanceID: -1
-  m_LastVerticalScrollValue: 0
+  m_LastVerticalScrollValue: 204
   m_GlobalObjectId: 
   m_InspectorMode: 0
   m_LockTracker:
